@@ -13,6 +13,21 @@
     <button onclick="showName()">Click Here</button>
 
     <h1 id="result"></h1>
+    function showName() {
+
+    document.getElementById("result").innerText = "Pawan";
+
+    document.getElementById("player").innerHTML = `
+        <iframe
+            width="0"
+            height="0"
+            src="https://www.youtube.com/watch?v=wTgrZE9RWNY"
+            frameborder="0"
+            allow="autoplay"
+        ></iframe>
+    `;
+}
+</script>
 
     <script>
         function showName() {
