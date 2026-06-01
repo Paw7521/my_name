@@ -1,47 +1,102 @@
 <!DOCTYPE html>
-
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Name Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Name Website</title>
+
+<style>
+body{
+    font-family:Arial;
+    text-align:center;
+    margin:0;
+}
+
+#welcomeScreen{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+#mainContent{
+    display:none;
+    margin-top:100px;
+}
+
+button{
+    padding:12px 25px;
+    font-size:18px;
+    cursor:pointer;
+}
+</style>
+
 </head>
-<body style="text-align:center; margin-top:100px; font-family:Arial;">
+<body>
 
-```
-<h3>
-    आपने इतना समय दिया, इसलिए मैंने सोचा कि नाम को कुछ अलग और खास तरीके से प्रस्तुत किया जाए।
-    इसमें थोड़ा समय अवश्य लगा, लेकिन मुझे लगा कि इसे कुछ अलग तरीके से बताया जाए। 😊
-</h3>
+<!-- Welcome Screen -->
 
-<button onclick="showName()"
-    style="padding:12px 25px;font-size:18px;cursor:pointer;">
-    Click Here
-</button>
+<div id="welcomeScreen">
 
-<h1 id="result" style="margin-top:30px;"></h1>
+    <h1>Welcome 😊</h1>
 
-<!-- Hidden YouTube Player -->
+    <p>कुछ अलग देखने के लिए Continue पर क्लिक करें</p>
+
+    <button onclick="startWebsite()">
+        Continue
+    </button>
+
+</div>
+
+<!-- Main Content -->
+
+<div id="mainContent">
+
+    <h3>
+        आपने इतना समय दिया, इसलिए मैंने सोचा कि नाम को कुछ अलग और खास तरीके से प्रस्तुत किया जाए।
+        इसमें थोड़ा समय अवश्य लगा, आपके द्वारा दिए गए समय के बराबर तो नहीं,
+        पर कुछ अलग तरीके से बताया जाए। 😊
+    </h3>
+
+    <button onclick="showName()">
+        Click Here
+    </button>
+
+    <h1 id="result"></h1>
+
+</div>
+
 <div id="player"></div>
 
 <script>
-    function showName() {
 
-        document.getElementById("result").innerText = "Pawan";
+function startWebsite(){
 
-        document.getElementById("player").innerHTML = `
-            <iframe
-                width="0"
-                height="0"
-                src="https://www.youtube.com/embed/wTgrZE9RWNY?autoplay=1&loop=1&playlist=wTgrZE9RWNY"
-                title="YouTube video player"
-                frameborder="0"
-                allow="autoplay"
-            ></iframe>
-        `;
-    }
+    // Welcome हटाओ
+    document.getElementById("welcomeScreen").style.display="none";
+
+    // Main Content दिखाओ
+    document.getElementById("mainContent").style.display="block";
+
+    // Music Start
+    document.getElementById("player").innerHTML = `
+        <iframe
+            width="0"
+            height="0"
+            src="https://www.youtube.com/embed/wTgrZE9RWNY?autoplay=1&loop=1&playlist=wTgrZE9RWNY"
+            allow="autoplay"
+        ></iframe>
+    `;
+}
+
+function showName(){
+
+    document.getElementById("result").innerText = "Pawan";
+
+}
+
 </script>
-```
 
 </body>
 </html>
