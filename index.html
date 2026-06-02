@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Name Website</title>
+<title>Curious JIYA</title>
 
 <style>
+
 body{
-    font-family:Arial;
+    font-family:Arial,sans-serif;
     text-align:center;
     margin:0;
+    background:#f8f8f8;
 }
 
 #welcomeScreen{
@@ -23,19 +25,99 @@ body{
 #mainContent{
     display:none;
     margin-top:100px;
+    padding:20px;
 }
 
 button{
     padding:12px 25px;
     font-size:18px;
     cursor:pointer;
+    border:none;
+    border-radius:8px;
 }
+
+.wave-name{
+    font-size:90px;
+    font-weight:bold;
+    color:#222;
+    margin-top:30px;
+    animation:waveEntry 2.5s ease-out forwards;
+}
+
+@keyframes waveEntry{
+
+    0%{
+        opacity:0;
+        transform:translateX(-500px) rotate(-20deg);
+    }
+
+    30%{
+        opacity:1;
+        transform:translateX(150px) rotate(10deg);
+    }
+
+    55%{
+        transform:translateX(-80px);
+    }
+
+    75%{
+        transform:translateX(40px);
+    }
+
+    100%{
+        transform:translateX(0);
+    }
+
+}
+
+.message{
+    max-width:800px;
+    margin:25px auto;
+    line-height:1.9;
+    font-size:18px;
+}
+
+#explosion{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.particle{
+    position:absolute;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    animation:boom 1.5s ease-out forwards;
+}
+
+@keyframes boom{
+
+    0%{
+        opacity:1;
+        transform:translate(0,0) scale(1);
+    }
+
+    100%{
+        opacity:0;
+        transform:
+        translate(var(--x),var(--y))
+        scale(0);
+    }
+
+}
+
 </style>
 
 </head>
+
 <body>
 
-<!-- Welcome Screen -->
+<div id="explosion"></div>
 
 <div id="welcomeScreen">
 
@@ -49,8 +131,6 @@ button{
 
 </div>
 
-<!-- Main Content -->
-
 <div id="mainContent">
 
     <h3>
@@ -63,7 +143,7 @@ button{
         Click Here
     </button>
 
-    <h1 id="result"></h1>
+    <div id="result"></div>
 
 </div>
 
@@ -71,28 +151,94 @@ button{
 
 <script>
 
+function createExplosion(){
+
+    const container =
+    document.getElementById("explosion");
+
+    for(let i=0;i<70;i++){
+
+        const p =
+        document.createElement("div");
+
+        p.className="particle";
+
+        p.style.left =
+        window.innerWidth/2 + "px";
+
+        p.style.top =
+        window.innerHeight/2 + "px";
+
+        p.style.background =
+        `hsl(${Math.random()*360},100%,50%)`;
+
+        p.style.setProperty(
+        "--x",
+        (Math.random()*1000-500)+"px"
+        );
+
+        p.style.setProperty(
+        "--y",
+        (Math.random()*1000-500)+"px"
+        );
+
+        container.appendChild(p);
+
+        setTimeout(()=>{
+            p.remove();
+        },1500);
+    }
+}
+
 function startWebsite(){
 
-    // Welcome हटाओ
-    document.getElementById("welcomeScreen").style.display="none";
+    createExplosion();
 
-    // Main Content दिखाओ
-    document.getElementById("mainContent").style.display="block";
+    setTimeout(()=>{
 
-    // Music Start
-    document.getElementById("player").innerHTML = `
-        <iframe
-            width="0"
-            height="0"
-            src="https://www.youtube.com/embed/wTgrZE9RWNY?autoplay=1&loop=1&playlist=wTgrZE9RWNY"
-            allow="autoplay"
-        ></iframe>
-    `;
+        document.getElementById("welcomeScreen").style.display="none";
+
+        document.getElementById("mainContent").style.display="block";
+
+        document.getElementById("player").innerHTML = `
+            <iframe
+                width="0"
+                height="0"
+                src="https://www.youtube.com/embed/wTgrZE9RWNY?autoplay=1&loop=1&playlist=wTgrZE9RWNY"
+                allow="autoplay"
+            ></iframe>
+        `;
+
+    },1200);
+
 }
 
 function showName(){
 
-    document.getElementById("result").innerText = "Pawan";
+    document.getElementById("result").innerHTML = `
+
+        <div class="wave-name">
+            Pawan
+        </div>
+
+        <div class="message">
+
+            अब बैच के लोगों से कोई सवाल नहीं है।
+            एक और व्यक्ति का जवाब आया,
+            कसम से रुला ही दिया।
+
+            ऐसी बातें कीं कि आपने वेटिंग लिस्ट में ऐसा डाल दिया
+            कि दुबारा रिस्पॉन्ड ही नहीं किया...
+
+            खैर, आपकी बातें और व्यवहार मुझे अच्छे लगे।
+
+            विषय पर थोड़ा चर्चा हो जाता तो शायद थोड़ी शांति मिल जाती,
+            क्योंकि आपसे पूछ भी लिया है,
+            तो बिना जाने शांति कहाँ मिलती है। 😊
+
+        </div>
+
+    `;
 
 }
 
